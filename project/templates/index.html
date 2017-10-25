@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}FlaskCards{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Hello, {% if cards %} 大时间周期，最小行动！{% else %}您还没有任何卡片！{% endif %}!</h1>
+</div>
+{{ wtf.quick_form(form) }}
+<ul class="cardss">
+    {% for card in cards %}
+    <li class="card">
+        <div class="card-content">
+            <div class="card-date">{{ moment(card.timestamp).fromNow() }}</div>
+            <div class="card-date">{{ card.title }}</div>
+            <div class="card-body">{{ card.body }}</div>
+        </div>
+    </li>
+    {% endfor %}
+  </u>
+{% endblock %}
