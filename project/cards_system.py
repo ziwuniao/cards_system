@@ -1,3 +1,4 @@
+#修改中，别运行！
 #创建新的数据库仓库
 from flask import Flask, render_template
 # from flask_script import  Manager
