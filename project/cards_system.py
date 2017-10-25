@@ -1,13 +1,16 @@
-#修改中，别运行！
-#创建新的数据库仓库
-from flask import Flask, render_template
-# from flask_script import  Manager
-from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm
-from flask_moment import Moment
-from wtforms import StringField, SubmitField
-from wtforms.validators import Required
+#配置数据库
+from flask import Flask
+from flask.ext.sqlalchemy import SQLAlchemy
+ 
+basedir = os.path.abspath(os.path.dirname(__file__))
 
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI‘] =\
+	'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+
+db = SQLAlchemy(app)
+#定义新的数据库仓库
 class Post(db.Model):
 	__tablename__ = 'post'
 	id = db.Column(db.Integer, primary_key=True)
