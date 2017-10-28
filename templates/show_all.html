@@ -1,42 +1,46 @@
 {% extends "base.html" %}
 
-{% block style %}
-  {{super}}
-  <style>
-li {
-    margin: auto;
-    border: 1px solid gray;
-    padding: 8px;
-}
-h4 {
-    text-align: center;
-    text-transform: uppercase;
-    color: #4CAF50;
-}
-p {
-    text-indent: 50px;
-    text-align: justify;
-    letter-spacing: 3px;
-}
-</style>
-{% endblock %}
 
 {% block title %}FlaskCards{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
-    <h2>Hello, 坚持大时间周期的最小行动！</h2>
-</div>
-<ul class="cards">
-    {% for card in cards %}
-    <li class="card">
-        <div class="card-content">
-            <h3>{{card.title}}</h3>
-            <p>{{ card.body }}</p>
-            <p><class="card-date">{{ moment(card.timestamp).fromNow() }}</p>
-          </div>
-    </li>
+<div class="page-header text-center">
+    <h2>远距联想，创造新作品</h2>
 
-    {% endfor %}
-  </ul>
+    <form>
+
+      <input type="submit" name="shuffle" value = "乱序拼接" class="btn btn-primary btn-lg margin-top:2rem" ></input>
+    </form>
+
+</div>
+<div class="container-fluid" style="margin-top:5rem;">
+
+    <div class="card-columns">
+
+        <!-- Card 4 -->
+        {% for card in cards %}
+        <div class="card text-center">
+            <div class="card-header"><h3>{{card.title}}</h3></div>
+            <div class="card-body">
+                <p class="card-text">{{ card.body }}</p>
+            </div>
+            <div class="card-footer"><small class="text-muted">{{ moment(card.timestamp).fromNow()}}</small></div>
+        </div>
+        {% endfor %}
+
+        <!-- 卡片可增加图片>
+        <!-- {% for card in cards %}
+        <div class="card">
+          <img class="card-img-top img-fluid" src="/static/desert-sky-1537792.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">{{card.title}}</h4>
+         <p class="card-text">{{ card.body }}</p>
+         <p class="card-text"><small class="text-muted">{{ moment(card.timestamp).fromNow()}}</small></p>
+       </div>
+     </div>
+      {% endfor %} -->
+
+
+    </div>
+</div>
 {% endblock %}

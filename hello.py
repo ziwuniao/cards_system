@@ -7,6 +7,7 @@ from flask_moment import Moment
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import Required
 from flask_sqlalchemy import SQLAlchemy
+from  sqlalchemy.sql.expression import func
 import os
 
 
@@ -31,7 +32,7 @@ db = SQLAlchemy(app)
 #创建卡片写作表单
 class CardForm(FlaskForm):
     title = TextAreaField("卡片标题", validators = [Required()])
-    body = TextAreaField('最小行动，记张卡片！', validators=[Required()])
+    body = TextAreaField('卡片内容', validators=[Required()])
     submit = SubmitField('Submit')
 
 #创建卡片数据库对象模型
@@ -82,8 +83,20 @@ def test_card():
 
 @app.route('/show_all', methods=['GET', 'POST'])
 def show_all():
-    cards = Card.query.order_by(Card.timestamp.desc()).all()
-    return render_template('show_all.html', cards=cards)
+    #不知道为何需要用到request.args
+    print(request.args.get("shuffle"))
+    print(request)
+    print(request.args)
+
+    if request.args.get("shuffle") == "乱序拼接":
+        #将数据库查询结果乱序
+        print(1111)
+        cards = Card.query.order_by(func.random()).all()
+        print(cards[0])
+    else:
+        cards = Card.query.order_by(Card.timestamp.desc()).all()
+    print(cards)
+    return render_template('show_all.html', cards =cards)
 
 
 # 在程序运行时即初始化数据库
