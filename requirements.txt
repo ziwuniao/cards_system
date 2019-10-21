@@ -34,5 +34,5 @@ virtualenv==15.1.0
 virtualenv-clone==0.2.6
 virtualenvwrapper-win==1.2.2
 wechatpy==1.5.1
-Werkzeug==0.12.2
+Werkzeug==0.15.3
 xmltodict==0.11.0
